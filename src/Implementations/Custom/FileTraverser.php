@@ -3,6 +3,7 @@
 namespace NiclasVanEyk\LsifPhp\Implementations\Custom;
 
 use NiclasVanEyk\LsifPhp\LsifGraph;
+use NiclasVanEyk\ScopeResolvingVisitor\ScopeResolvingVisitor;
 use PhpParser\Lexer;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\NameResolver;
@@ -30,7 +31,9 @@ class FileTraverser
 
         $traverser = new NodeTraverser();
         $traverser->addVisitor(new NameResolver());
-        $graphItemCollector = new LsifGraphItemCollectingVisitor();
+        $scopeVisitor = new ScopeResolvingVisitor();
+        $graphItemCollector = new LsifGraphItemCollectingVisitor($scopeVisitor);
+        $traverser->addVisitor($scopeVisitor);
         $traverser->addVisitor($graphItemCollector);
         $traverser->traverse($statements);
     }

@@ -3,6 +3,10 @@
     "description": "A LSIF implementation for PHP",
     "type": "project",
     "license": "MIT",
+    "repositories": [{
+        "type": "path",
+        "url": "../scope-resolving-visitor"
+    }],
     "autoload": {
         "psr-4": {
             "NiclasVanEyk\\LsifPhp\\": "src/"
@@ -23,6 +27,7 @@
         "phpunit/phpunit": "^9.5"
     },
     "require": {
-        "nikic/php-parser": "^4.13"
+        "nikic/php-parser": "^4.13",
+        "niclas-van-eyk/scope-resolving-visitor": "*"
     }
 }

@@ -2,10 +2,9 @@
 
 namespace NiclasVanEyk\LsifPhp;
 
-use LanguageServer\Definition;
-use NiclasVanEyk\LsifPhp\Dump\IdGenerator;
-use NiclasVanEyk\LsifPhp\Dump\LsifGraphDocuments;
-use NiclasVanEyk\LsifPhp\Dump\LsifGraphHoverResults;
+use NiclasVanEyk\LsifPhp\Implementations\Custom\IdGenerator;
+use NiclasVanEyk\LsifPhp\Implementations\Custom\LsifGraphDocuments;
+use NiclasVanEyk\LsifPhp\Implementations\Custom\LsifGraphHoverResults;
 
 class LsifGraph
 {
@@ -19,11 +18,8 @@ class LsifGraph
         $this->documents = new LsifGraphDocuments($this->ids);
     }
 
-    public function add(Definition $definition)
+    public function nextId(): int
     {
-        $this->documents->maybeAdd($definition);
-        $definition->
-
-//        if ($definition->symbolInformation)
+        return $this->ids->next();
     }
 }
