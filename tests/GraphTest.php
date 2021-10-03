@@ -19,9 +19,5 @@ class GraphTest extends \PHPUnit\Framework\TestCase
             }
         }
         ';
-
-
-        (new \NiclasVanEyk\LsifPhp\Implementations\Custom\FileTraverser())
-            ->parse($contents);
     }
 }

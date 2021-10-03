@@ -27,7 +27,9 @@
         "phpunit/phpunit": "^9.5"
     },
     "require": {
+        "niclas-van-eyk/scope-resolving-visitor": "*",
         "nikic/php-parser": "^4.13",
-        "niclas-van-eyk/scope-resolving-visitor": "*"
+        "phpstan/phpstan": "^0.12.99",
+        "symfony/finder": "^5.3"
     }
 }

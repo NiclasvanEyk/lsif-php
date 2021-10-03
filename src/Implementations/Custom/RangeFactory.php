@@ -2,15 +2,18 @@
 
 namespace NiclasVanEyk\LsifPhp\Implementations\Custom;
 
-use NiclasVanEyk\LsifPhp\Protocol\Vertices\Range;
+use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifDumpContainer;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Range;
 use PhpParser\Node;
 
 class RangeFactory
 {
-    public static function for(Node $node, int $id): Range
+    public function __construct(private LsifDumpContainer $dump) { }
+
+    public function for(Node $node): Range
     {
         return new Range(
-            $id,
+            $this->dump->nextId(),
             $node->getStartLine(),
             $node->getStartTokenPos(),
             $node->getEndLine(),

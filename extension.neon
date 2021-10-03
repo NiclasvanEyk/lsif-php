@@ -1,0 +1,5 @@
+parametersSchema:
+	lsif: structure([
+		composer_json_path: schema(string(), nullable())
+		output_path: schema(string(), nullable())
+	])

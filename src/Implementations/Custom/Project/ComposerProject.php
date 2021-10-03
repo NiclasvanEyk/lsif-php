@@ -2,6 +2,8 @@
 
 namespace NiclasVanEyk\LsifPhp\Implementations\Custom\Project;
 
+use NiclasVanEyk\LsifPhp\Lang\Symbol;
+
 class ComposerProject
 {
     /**
@@ -19,8 +21,15 @@ class ComposerProject
      */
     public array $files = [];
 
+    public function __construct(private string $root) { }
+
     public function define(Symbol $symbol)
     {
         $this->symbols[$symbol->fqn()] = $symbol;
+    }
+
+    public function addFile(File $file)
+    {
+        $this->files[$file->path] = $file;
     }
 }

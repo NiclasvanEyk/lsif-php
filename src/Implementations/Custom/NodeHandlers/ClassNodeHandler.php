@@ -1,11 +1,11 @@
 <?php
 
-namespace NiclasVanEyk\LsifPhp\Implementations\Custom\NodeHandlers;
+namespace NiclasVanEyk\LsifPhp\Implementations\Custom\SymbolCollection\NodeHandlers;
 
-use NiclasVanEyk\LsifPhp\Implementations\Custom\NodeHandler;
-use NiclasVanEyk\LsifPhp\Implementations\Custom\RangeFactory;
-use NiclasVanEyk\LsifPhp\Protocol\Edges\Next;
-use NiclasVanEyk\LsifPhp\Protocol\Vertices\ResultSet;
+use NiclasVanEyk\LsifPhp\Implementations\Custom\SymbolCollection\NodeHandler;
+use NiclasVanEyk\LsifPhp\Implementations\Custom\SymbolCollection\RangeFactory;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Edges\Next;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\ResultSet;
 use PhpParser\Node;
 
 class ClassNodeHandler extends NodeHandler
