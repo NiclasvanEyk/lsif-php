@@ -24,14 +24,14 @@ class DocumentContainer
     }
 
     /**
-     * @param Node $node
+     * @param Node $nameNode
      */
-    public function addDefinition(Node $node): void
+    public function addDefinition(Node $nameNode, Node $docNode): void
     {
-        $range = $this->addRange($node);
+        $range = $this->addRange($nameNode);
         $resultSet = $this->addResultSet($range);
         $this->addDefinitionResult($range, $resultSet);
-        $this->addHoverResult($node, $resultSet);
+        $this->addHoverResult($docNode, $resultSet);
     }
 
     private function addRange(Node $node): Range

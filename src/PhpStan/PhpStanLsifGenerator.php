@@ -10,6 +10,9 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\FileNode;
 
+/**
+ * Generates stuff for stuff
+ */
 class PhpStanLsifGenerator
 {
     public LsifDumpContainer $dump;
@@ -31,6 +34,15 @@ class PhpStanLsifGenerator
 
         if ($node instanceof Class_) {
             $this->processClassNode($node);
+            return;
+        }
+
+        if ($node instanceof Node\Stmt\Property) {
+            $this->processProperty($node);
+        }
+
+        if ($node instanceof Node\Stmt\ClassMethod) {
+            $this->processClassMethod($node);
         }
     }
 
@@ -49,7 +61,37 @@ class PhpStanLsifGenerator
 
     private function processClassNode(Class_ $node): void {
         if ($this->currentDocument === null) return;
+        if (!(($name = $node->name) instanceof Node)) return;
 
-        $this->currentDocument->addDefinition($node);
+        $this->normalizeNameNode($name);
+        $this->currentDocument->addDefinition($name, $node);
+    }
+
+    private function processClassMethod(Node\Stmt\ClassMethod $node): void
+    {
+        if ($this->currentDocument === null) return;
+        if (!(($name = $node->name) instanceof Node)) return;
+
+        $this->normalizeNameNode($name);
+        $this->currentDocument->addDefinition($name, $node);
+    }
+
+    private function normalizeNameNode(Node\Name|Node\Identifier $name): void
+    {
+        $sameLine = $name->getStartLine() === $name->getEndLine();
+        $sameColumn = $name->getStartTokenPos() === $name->getEndTokenPos();
+        if ($sameLine && $sameColumn) {
+            $nameLength = mb_strlen($name->name);
+            $name->setAttribute('endTokenPos', $name->getStartTokenPos() + $nameLength);
+        }
+    }
+
+    private function processProperty(Node\Stmt\Property $node)
+    {
+        if ($this->currentDocument === null) return;
+        foreach ($node->props as $property) {
+            if (!(($name = $property->name) instanceof Node)) continue;
+            $this->currentDocument->addDefinition($name, $node);
+        }
     }
 }
