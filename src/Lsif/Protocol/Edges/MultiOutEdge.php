@@ -30,7 +30,7 @@ abstract class MultiOutEdge extends LsifGraphItem
     {
         return [
             'id' => $this->id,
-            'type' => 'vertex',
+            'type' => 'edge',
             'label' => $this->label(),
             'outVs' => array_map(fn ($v) => $v->id, $this->out),
             'inV' => $this->in->id,

@@ -4,7 +4,7 @@ namespace NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices;
 
 class Project extends Vertex
 {
-    public function __construct(int $id, private string $kind)
+    public function __construct(int $id, private string $kind, private string $name)
     {
         parent::__construct($id);
     }
@@ -13,6 +13,7 @@ class Project extends Vertex
     {
         return $this->vertexToArray('project', [
             'kind' => $this->kind,
+            'name' => $this->name,
         ]);
     }
 }

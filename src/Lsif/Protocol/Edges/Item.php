@@ -19,6 +19,6 @@ class Item extends MultiInEdge
 
     protected function additionalData(): array
     {
-        return ['document' => $this->document->id];
+        return ['shard' => $this->document->id];
     }
 }

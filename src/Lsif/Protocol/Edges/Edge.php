@@ -27,7 +27,7 @@ abstract class Edge extends LsifGraphItem
     {
         return array_merge([
             'id' => $this->id,
-            'type' => 'vertex',
+            'type' => 'edge',
             'label' => $this->label(),
             'outV' => $this->out->id,
             'inV' => $this->in->id,

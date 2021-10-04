@@ -17,7 +17,8 @@ class Metadata extends Vertex
     {
         return $this->vertexToArray('metaData', [
             'version' => $this->version,
-            'projectRoot' => $this->projectRoot,
+//            'projectRoot' => $this->projectRoot,
+            'positionEncoding' => 'utf-16',
             'toolInfo' => $this->toolInfo,
         ]);
     }

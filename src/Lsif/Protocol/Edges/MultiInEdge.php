@@ -25,14 +25,19 @@ abstract class MultiInEdge extends LsifGraphItem
 
     abstract public function label(): string;
 
+    protected function additionalData(): array
+    {
+        return [];
+    }
+
     public function toArray(): array
     {
-        return [
+        return array_merge([
             'id' => $this->id,
-            'type' => 'vertex',
+            'type' => 'edge',
             'label' => $this->label(),
             'outV' =>$this->out->id,
             'inVs' => array_map(fn ($v) => $v->id, $this->in),
-        ];
+        ], $this->additionalData());
     }
 }

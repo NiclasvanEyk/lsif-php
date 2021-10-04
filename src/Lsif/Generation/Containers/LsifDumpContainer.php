@@ -42,9 +42,9 @@ class LsifDumpContainer
         return $this->ids->next();
     }
 
-    public function beginProject(string $uri, string $kind = 'php'): ProjectContainer
+    public function beginProject(string $uri, string $name, string $kind = 'php'): ProjectContainer
     {
-        $project = new Project($this->nextId(), $kind);
+        $project = new Project($this->nextId(), $kind, $name);
         $container = new ProjectContainer($this, $project);
         $this->projects[$uri] = $container;
 

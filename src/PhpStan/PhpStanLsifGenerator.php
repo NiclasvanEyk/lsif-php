@@ -19,7 +19,7 @@ class PhpStanLsifGenerator
     public function __construct(private string $projectRoot)
     {
         $this->dump = new LsifDumpContainer($this->projectRoot);
-        $this->project = $this->dump->beginProject($this->projectRoot);
+        $this->project = $this->dump->beginProject($this->projectRoot, 'test');
     }
 
     public function processNode(Node $node, Scope $scope): void
