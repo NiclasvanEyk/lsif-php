@@ -2,6 +2,8 @@
 
 namespace NiclasVanEyk\LsifPhp\Lsif\Generation;
 
+use NiclasVanEyk\LsifPhp\Lsif\Generation\Containers\LsifDumpContainer;
+
 class LsifDumpWriter
 {
     public function write(LsifDumpContainer $dump, string $destination): void

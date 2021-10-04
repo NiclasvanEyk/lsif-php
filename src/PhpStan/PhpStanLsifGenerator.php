@@ -3,14 +3,12 @@
 namespace NiclasVanEyk\LsifPhp\PhpStan;
 
 use NiclasVanEyk\LsifPhp\Lsif\Generation\Containers\DocumentContainer;
+use NiclasVanEyk\LsifPhp\Lsif\Generation\Containers\LsifDumpContainer;
 use NiclasVanEyk\LsifPhp\Lsif\Generation\Containers\ProjectContainer;
-use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifDumpContainer;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Document;
-use PhpParser\Builder\Class_;
 use PhpParser\Node;
+use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\FileNode;
-use PHPStan\Reflection\ClassReflection;
 
 class PhpStanLsifGenerator
 {
@@ -31,25 +29,27 @@ class PhpStanLsifGenerator
             return;
         }
 
-        if ($node instanceof Class_
-            && ($class = $scope->getClassReflection()) === null) {
-            $this->processClassNode($node, $class, $scope);
+        if ($node instanceof Class_) {
+            $this->processClassNode($node);
+        }
+    }
+
+    public function flushCurrentDocument(): void
+    {
+        if ($this->currentDocument !== null) {
+            $this->project->endDocument($this->currentDocument->document);
         }
     }
 
     private function processFileNode(FileNode $node, Scope $scope): void
     {
-        if ($this->currentDocument !== null) {
-            $this->dump->endDocument($this->currentDocument);
-        }
-
-        $this->currentDocument = $this->dump->beginDocument($scope->getFile());
+        $this->flushCurrentDocument();
+        $this->currentDocument = $this->project->beginDocument($scope->getFile());
     }
 
-    private function processClassNode(Class_ $node, ClassReflection $class, Scope $scope)
-    {
+    private function processClassNode(Class_ $node): void {
         if ($this->currentDocument === null) return;
 
-        $this->currentDocument->addDefinition();
+        $this->currentDocument->addDefinition($node);
     }
 }

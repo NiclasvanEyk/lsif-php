@@ -1,8 +1,8 @@
 <?php
 
-namespace NiclasVanEyk\LsifPhp\Lsif\Generation;
+namespace NiclasVanEyk\LsifPhp\Lsif\Generation\Containers;
 
-use NiclasVanEyk\LsifPhp\Lsif\Generation\Containers\ProjectContainer;
+use NiclasVanEyk\LsifPhp\Lsif\Generation\IdGenerator;
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\LsifGraphItem;
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\ProtocolVersion;
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Begin;
@@ -15,8 +15,6 @@ class LsifDumpContainer
 {
     private Metadata $metadata;
     private IdGenerator $ids;
-
-    public LsifItemFactory $itemFactory;
 
     /** @var LsifGraphItem[] */
     private array $items = [];
@@ -37,7 +35,6 @@ class LsifDumpContainer
             ],
         );
         $this->addItem($this->metadata);
-        $this->itemFactory = new LsifItemFactory($this);
     }
 
     public function nextId(): int

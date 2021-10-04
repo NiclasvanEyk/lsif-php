@@ -2,10 +2,10 @@
 
 namespace NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices;
 
-class ResultSet extends Vertex
+class ReferenceResult extends Vertex
 {
     public function toArray(): array
     {
-        return $this->vertexToArray('resultSet');
+        return $this->vertexToArray('referenceResult');
     }
 }

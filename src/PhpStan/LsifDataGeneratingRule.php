@@ -2,6 +2,7 @@
 
 namespace NiclasVanEyk\LsifPhp\PhpStan;
 
+use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifDumpWriter;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
@@ -18,7 +19,13 @@ class LsifDataGeneratingRule implements Rule
 
     public function __destruct()
     {
-        echo 'LsifDataGeneratingRule::__destruct' . PHP_EOL;
+        $this->generator->flushCurrentDocument();
+        $destination = __DIR__ . '/../../dump.lsif';
+
+        echo 'Finished LSIF item collection!' . PHP_EOL;
+        echo "Writing dump to '$destination'..." . PHP_EOL;
+
+        (new LsifDumpWriter())->write($this->generator->dump, $destination);
     }
 
     public function getNodeType(): string

@@ -4,7 +4,7 @@
 use NiclasVanEyk\LsifPhp\Implementations\Custom\FileSymbolCollector;
 use NiclasVanEyk\LsifPhp\Implementations\Custom\Project\ComposerProject;
 use NiclasVanEyk\LsifPhp\Implementations\Custom\Project\File;
-use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifDumpContainer;
+use NiclasVanEyk\LsifPhp\Lsif\Generation\Containers\LsifDumpContainer;
 use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifDumpWriter;
 use Symfony\Component\Finder\Finder;
 

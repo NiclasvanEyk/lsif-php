@@ -2,8 +2,6 @@
 
 namespace NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices;
 
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Edges\Vertex;
-
 class Range extends Vertex
 {
     private int $startLine;

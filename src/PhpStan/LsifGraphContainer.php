@@ -2,8 +2,6 @@
 
 namespace NiclasVanEyk\LsifPhp\PhpStan;
 
-use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifDumpContainer;
-
 class LsifGraphContainer
 {
     protected static ?LsifGraphContainer $graph;

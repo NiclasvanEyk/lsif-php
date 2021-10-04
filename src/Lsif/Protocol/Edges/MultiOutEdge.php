@@ -3,6 +3,7 @@
 namespace NiclasVanEyk\LsifPhp\Lsif\Protocol\Edges;
 
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\LsifGraphItem;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Vertex;
 
 abstract class MultiOutEdge extends LsifGraphItem
 {

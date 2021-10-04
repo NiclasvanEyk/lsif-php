@@ -3,6 +3,7 @@
 namespace NiclasVanEyk\LsifPhp\Lsif\Protocol\Edges;
 
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Document;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Vertex;
 
 class Item extends MultiInEdge
 {

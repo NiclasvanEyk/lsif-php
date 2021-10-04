@@ -2,7 +2,7 @@
 
 namespace NiclasVanEyk\LsifPhp\Implementations\Custom;
 
-use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifDumpContainer;
+use NiclasVanEyk\LsifPhp\Lsif\Generation\Containers\LsifDumpContainer;
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Range;
 use PhpParser\Node;
 

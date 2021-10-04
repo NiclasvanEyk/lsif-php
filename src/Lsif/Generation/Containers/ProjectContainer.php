@@ -2,7 +2,6 @@
 
 namespace NiclasVanEyk\LsifPhp\Lsif\Generation\Containers;
 
-use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifDumpContainer;
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\Edges\Contains;
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Begin;
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Document;

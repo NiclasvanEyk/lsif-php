@@ -1,6 +1,6 @@
 <?php
 
-namespace NiclasVanEyk\LsifPhp\Lsif\Protocol\Edges;
+namespace NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices;
 
 use NiclasVanEyk\LsifPhp\Lsif\Protocol\LsifGraphItem;
 
