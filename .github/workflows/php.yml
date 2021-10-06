@@ -28,7 +28,7 @@ jobs:
       run: composer install --prefer-dist --no-progress
       
     - name: Generate LSIF data
-      run: ./vendor/bin/phpstan --memory-limit 4g --configuration phpstan.neon
+      run: ./vendor/bin/phpstan analyze --memory-limit 4G --configuration phpstan.neon
 
     - name: Upload LSIF data
       uses: docker://sourcegraph/src-cli:latest
