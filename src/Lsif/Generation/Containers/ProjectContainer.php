@@ -2,29 +2,23 @@
 
 namespace NiclasVanEyk\LsifPhp\Lsif\Generation\Containers;
 
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Edges\Contains;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Begin;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Document;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\End;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Project;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Edges\Contains;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Begin;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Document;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\End;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Project;
 
 class ProjectContainer
 {
-    /**
-     * @var array<string, DocumentContainer>
-     */
-    private array $documents = [];
-
     public function __construct(
         private LsifDumpContainer $dump,
-        private Project $project,
+        public Project $project,
     ) { }
 
     public function beginDocument(string $uri, string $languageId = 'php'): DocumentContainer
     {
         $document = new Document($this->dump->nextId(), $uri, $languageId);
-        $container = new DocumentContainer($this->dump, $this, $document);
-        $this->documents[$uri] = $container;
+        $container = new DocumentContainer($this->dump, $document);
 
         $this->dump->addItem($document);
         $this->dump->addItem(
@@ -42,10 +36,5 @@ class ProjectContainer
         $this->dump->addItem(
             new End($this->dump->nextId(), 'document', $document->id),
         );
-    }
-
-    public function getDocumentByUri(string $uri): ?Document
-    {
-        return $this->documents[$uri];
     }
 }

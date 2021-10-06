@@ -7,6 +7,9 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 
+/**
+ * @implements Rule<Node>
+ */
 class LsifDataGeneratingRule implements Rule
 {
     private PhpStanLsifGenerator $generator;
@@ -19,7 +22,7 @@ class LsifDataGeneratingRule implements Rule
 
     public function __destruct()
     {
-        $this->generator->flushCurrentDocument();
+        $this->generator->close();
         $destination = __DIR__ . '/../../dump.lsif';
 
         echo 'Finished LSIF item collection!' . PHP_EOL;

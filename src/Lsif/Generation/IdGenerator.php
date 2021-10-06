@@ -2,11 +2,11 @@
 
 namespace NiclasVanEyk\LsifPhp\Lsif\Generation;
 
-class IdGenerator
+class IdGenerator implements \NiclasVanEyk\LsifPhp\Lsif\Protocol\Builder\IdGenerator
 {
     private int $counter = 1;
 
-    public function next(): int
+    public function nextId(): int
     {
         return $this->counter++;
     }

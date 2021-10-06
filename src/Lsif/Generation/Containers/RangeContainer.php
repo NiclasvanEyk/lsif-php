@@ -2,11 +2,11 @@
 
 namespace NiclasVanEyk\LsifPhp\Lsif\Generation\Containers;
 
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\DefinitionResult;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\HoverResult;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Range;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\ReferenceResult;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\ResultSet;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\DefinitionResult;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\HoverResult;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Range;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\ReferenceResult;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\ResultSet;
 
 class RangeContainer
 {

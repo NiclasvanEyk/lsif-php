@@ -3,15 +3,15 @@
 namespace NiclasVanEyk\LsifPhp\Lsif\Generation\Containers;
 
 use NiclasVanEyk\LsifPhp\Lsif\Generation\IdGenerator;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\LsifGraphItem;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\ProtocolVersion;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Begin;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\End;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Metadata;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Project;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\LsifGraphItem;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\ProtocolVersion;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Begin;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\End;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Metadata;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Project;
 use NiclasVanEyk\LsifPhp\Version;
 
-class LsifDumpContainer
+class LsifDumpContainer implements \NiclasVanEyk\LsifPhp\Lsif\Protocol\Builder\IdGenerator
 {
     private Metadata $metadata;
     private IdGenerator $ids;
@@ -39,7 +39,7 @@ class LsifDumpContainer
 
     public function nextId(): int
     {
-        return $this->ids->next();
+        return $this->ids->nextId();
     }
 
     public function beginProject(string $uri, string $name, string $kind = 'php'): ProjectContainer
@@ -64,6 +64,9 @@ class LsifDumpContainer
         $this->items[] = $item;
     }
 
+    /**
+     * @return LsifGraphItem[]
+     */
     public function items(): array
     {
         return $this->items;

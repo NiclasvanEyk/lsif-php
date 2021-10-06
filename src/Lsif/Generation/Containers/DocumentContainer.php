@@ -4,9 +4,12 @@ namespace NiclasVanEyk\LsifPhp\Lsif\Generation\Containers;
 
 use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifEdgeFactory;
 use NiclasVanEyk\LsifPhp\Lsif\Generation\LsifVertexFactory;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Document;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Range;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\ResultSet;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Builder\SymbolDefinition;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Edges\Contains;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\LsifGraphItem;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Document;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Range;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\ResultSet;
 use PhpParser\Node;
 
 class DocumentContainer
@@ -16,16 +19,30 @@ class DocumentContainer
 
     public function __construct(
         private LsifDumpContainer $dump,
-        private ProjectContainer $project,
         public Document $document,
     ) {
         $this->edge = new LsifEdgeFactory($this->dump);
         $this->vertex = new LsifVertexFactory($this->dump);
     }
 
-    /**
-     * @param Node $nameNode
-     */
+    public function defineSymbol(Node $nameNode, Node $docNode): void
+    {
+        $this->dump->addItem($range = $this->vertex->range($nameNode));
+        $this->dump->addItem(new Contains($this->dump->nextId(), $this->document, [$range]));
+        $symbol = SymbolDefinition::create(
+            $range,
+            $this->document,
+            $this->dump,
+            fn (LsifGraphItem $item) => $this->dump->addItem($item),
+        );
+        if (($comment = $docNode->getDocComment()) !== null) {
+            $symbol->addHoverDefinition(
+                'todo: add meaningful preview',
+                $comment->getText(),
+            );
+        }
+    }
+
     public function addDefinition(Node $nameNode, Node $docNode): void
     {
         $range = $this->addRange($nameNode);
@@ -52,7 +69,7 @@ class DocumentContainer
         return $resultSet;
     }
 
-    public function addReference(Node $node)
+    public function addReference(Node $node): void
     {
         $range = $this->vertex->range($node);
         $this->dump->addItem($range);

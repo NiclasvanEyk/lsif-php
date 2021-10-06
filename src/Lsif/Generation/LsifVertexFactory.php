@@ -3,10 +3,10 @@
 namespace NiclasVanEyk\LsifPhp\Lsif\Generation;
 
 use NiclasVanEyk\LsifPhp\Lsif\Generation\Containers\LsifDumpContainer;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\DefinitionResult;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\HoverResult;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\Range;
-use NiclasVanEyk\LsifPhp\Lsif\Protocol\Vertices\ResultSet;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\DefinitionResult;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\HoverResult;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\Range;
+use NiclasVanEyk\LsifPhp\Lsif\Protocol\Raw\Vertices\ResultSet;
 use PhpParser\Node;
 
 class LsifVertexFactory

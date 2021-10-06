@@ -28,6 +28,7 @@ class PhpStanLsifGenerator
     public function processNode(Node $node, Scope $scope): void
     {
         if ($node instanceof FileNode) {
+            echo 'File: ' . $scope->getFile() . PHP_EOL;
             $this->processFileNode($node, $scope);
             return;
         }
@@ -64,7 +65,7 @@ class PhpStanLsifGenerator
         if (!(($name = $node->name) instanceof Node)) return;
 
         $this->normalizeNameNode($name);
-        $this->currentDocument->addDefinition($name, $node);
+        $this->currentDocument->defineSymbol($name, $node);
     }
 
     private function processClassMethod(Node\Stmt\ClassMethod $node): void
@@ -73,7 +74,7 @@ class PhpStanLsifGenerator
         if (!(($name = $node->name) instanceof Node)) return;
 
         $this->normalizeNameNode($name);
-        $this->currentDocument->addDefinition($name, $node);
+        $this->currentDocument->defineSymbol($name, $node);
     }
 
     private function normalizeNameNode(Node\Name|Node\Identifier $name): void
@@ -86,12 +87,18 @@ class PhpStanLsifGenerator
         }
     }
 
-    private function processProperty(Node\Stmt\Property $node)
+    private function processProperty(Node\Stmt\Property $node): void
     {
         if ($this->currentDocument === null) return;
         foreach ($node->props as $property) {
             if (!(($name = $property->name) instanceof Node)) continue;
-            $this->currentDocument->addDefinition($name, $node);
+            $this->currentDocument->defineSymbol($name, $node);
         }
+    }
+
+    public function close(): void
+    {
+        $this->flushCurrentDocument();
+        $this->dump->endProject($this->project->project);
     }
 }

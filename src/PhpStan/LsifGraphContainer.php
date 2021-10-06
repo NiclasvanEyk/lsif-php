@@ -11,7 +11,7 @@ class LsifGraphContainer
         return self::$graph;
     }
 
-    public function set(LsifGraphContainer $graph)
+    public function set(LsifGraphContainer $graph): void
     {
         self::$graph = $graph;
     }
